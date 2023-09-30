@@ -4,22 +4,9 @@ import {StyleSheet, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {MaterialCommunityIcons, Ionicons} from '@expo/vector-icons';
-
-function HomeScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function CalendarScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
+import {CalendarScreen} from "./screens/Calendar";
+import {HomeScreen} from "./screens/Home";
+import {SponsorsScreen} from "./screens/Sponsors";
 
 const Tab = createBottomTabNavigator();
 
@@ -56,6 +43,17 @@ export default function App() {
               }
             })}
             component={CalendarScreen}
+          />
+          <Tab.Screen
+            name="Sponsorzy"
+            options={() => ({
+              tabBarIcon: ({focused, color, size}) => {
+                const iconName = focused ? "people-circle" : "people-circle-outline";
+
+                return <Ionicons name={iconName} size={size} color={color}/>;
+              }
+            })}
+            component={SponsorsScreen}
           />
         </Tab.Navigator>
       </NavigationContainer>
