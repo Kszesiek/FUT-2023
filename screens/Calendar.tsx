@@ -111,11 +111,11 @@ export function CalendarScreen() {
     if (flatListRef.current) {
       events.every((event, index) => {
         if (event.datetime_start > currentDate) {
-          flatListRef.current?.scrollToIndex({animated: false, index: index});
+          flatListRef.current?.scrollToIndex({animated: true, index: index});
           return;
         }
       });
-      flatListRef.current?.scrollToIndex({animated: false, index: events.length - 1});
+      flatListRef.current?.scrollToIndex({animated: true, index: events.length - 1});
     }
   }, [flatListRef]);
 

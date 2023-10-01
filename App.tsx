@@ -1,21 +1,40 @@
 import * as React from 'react';
-import {StatusBar} from 'expo-status-bar';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {MaterialCommunityIcons, Ionicons} from '@expo/vector-icons';
 import {CalendarScreen} from "./screens/Calendar";
 import {HomeScreen} from "./screens/Home";
 import {SponsorsScreen} from "./screens/Sponsors";
+import {Image} from "react-native";
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <>
-      <StatusBar style="auto"/>
+    <SafeAreaProvider>
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={() => ({
+            headerStyle: (() => {
+              const insets = useSafeAreaInsets();
+              return {
+                height: 80 + insets.top,
+              }
+            })(),
+            headerTitle: () => {
+              return <Image
+                source={require("./assets/fut_logo_wide.png")}
+                resizeMode={"contain"}
+                style={{
+                  width: 245,
+                  height: 80,
+                }}
+              />
+            }
             // tabBarActiveTintColor: 'tomato',
             // tabBarInactiveTintColor: 'gray',
           })}
@@ -56,6 +75,6 @@ export default function App() {
           />
         </Tab.Navigator>
       </NavigationContainer>
-    </>
+    </SafeAreaProvider>
   );
 }
