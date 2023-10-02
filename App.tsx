@@ -34,8 +34,8 @@ export default function App() {
                   height: 80,
                 }}
               />
-            }
-            // tabBarActiveTintColor: 'tomato',
+            },
+            tabBarActiveTintColor: '#AA0132',
             // tabBarInactiveTintColor: 'gray',
           })}
         >
@@ -52,7 +52,7 @@ export default function App() {
             component={HomeScreen}
           />
           <Tab.Screen
-            name="Wydarzenia"
+            name="Harmonogram"
             options={() => ({
               tabBarIcon: ({focused, color, size}) => {
                 const iconName = focused ? "format-list-text" : "format-list-text";

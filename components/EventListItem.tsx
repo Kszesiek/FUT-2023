@@ -16,8 +16,22 @@ function getTimeFrame(start: Date, end: Date) {
 }
 
 export function EventListItem<T extends eventType>(event: Event<T>) {
-  const lecturerLabel = typeof event.lecturer === "string" ? <Text style={textStyles.label}>Prowadzący: {event.lecturer}</Text> : <></>;
   const currentDate = new Date("2023-10-14T16:00:00.000Z");
+  const doesTakePlaceNow: boolean = event.datetime_start < currentDate && currentDate < event.datetime_end
+  const textStyles = StyleSheet.create({
+    title: {
+      fontSize: 18,
+      fontWeight: "bold",
+      color: doesTakePlaceNow ? "white" : "black",
+    },
+    label: {
+      fontSize: 12,
+      color: doesTakePlaceNow ? "white" : "black",
+    }
+  })
+
+  const lecturerLabel = typeof event.lecturer === "string" ?
+    <Text style={textStyles.label}>Prowadzący: {event.lecturer}</Text> : <></>;
 
   function getEventTypeIndicator() {
     const [backgroundColor, width] = ((): [ColorValue, number] => {
@@ -37,7 +51,7 @@ export function EventListItem<T extends eventType>(event: Event<T>) {
   }
 
   return <View style={styles.outerContainer}>
-    <View style={styles.innerContainer}>
+    <View style={[styles.innerContainer, doesTakePlaceNow && {backgroundColor: "#AA0132"}]}>
       {getEventTypeIndicator()}
       <View style={{flex: 1,}}>
         <Text style={textStyles.title}>{event.name}</Text>
@@ -46,7 +60,7 @@ export function EventListItem<T extends eventType>(event: Event<T>) {
         <Text style={textStyles.label}>Sala: {event.room}</Text>
       </View>
     </View>
-    {currentDate > event.datetime_start && <View style={styles.inactiveEventOverlay}/>}
+    {currentDate > event.datetime_end && <View style={styles.inactiveEventOverlay}/>}
   </View>;
 }
 
@@ -78,15 +92,5 @@ const styles = StyleSheet.create({
     width: 24,
     marginRight: 8,
     alignItems: "flex-end",
-  }
-})
-
-const textStyles = StyleSheet.create({
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  label: {
-    fontSize: 12,
   }
 })
