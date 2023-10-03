@@ -23,6 +23,7 @@ export default function App() {
               const insets = useSafeAreaInsets();
               return {
                 height: 80 + insets.top,
+                elevation: 12
               }
             })(),
             headerTitle: () => {

@@ -1,5 +1,6 @@
 import {View, Text, StyleSheet, ColorValue} from "react-native";
 import {Event, eventType} from "../screens/Calendar";
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 function getTimeFrame(start: Date, end: Date) {
   const timeDifference = end.getTime() - start.getTime();
@@ -34,30 +35,26 @@ export function EventListItem<T extends eventType>(event: Event<T>) {
     <Text style={textStyles.label}>Prowadzący: {event.lecturer}</Text> : <></>;
 
   function getEventTypeIndicator() {
-    const [backgroundColor, width] = ((): [ColorValue, number] => {
-      switch (event.type) {
-        case "main event":
-          return ["#F29F05", 24];
-        case "lecture":
-          return ["#A387D7", 12];
-        default:
-          return ["#888", 12];
-      }
-    })();
+    const backgroundColor: { [key in keyof eventType]: ColorValue } = {
+      "main event": "#F29F05",
+      "lecture": "#A387D7",
+      undefined: "#888",
+    };
 
-    return <View style={styles.eventTypeIndicatorContainer}>
-      <View style={[styles.eventTypeIndicatorTemplate, {backgroundColor, width}]}/>
-    </View>
+    return <View style={[styles.eventTypeIndicatorTemplate, {backgroundColor: backgroundColor[event.type]}]}/>
   }
 
-  return <View style={styles.outerContainer}>
+  return <View style={[styles.outerContainer, doesTakePlaceNow && {backgroundColor: "#AA0132"}]}>
+    {getEventTypeIndicator()}
     <View style={[styles.innerContainer, doesTakePlaceNow && {backgroundColor: "#AA0132"}]}>
-      {getEventTypeIndicator()}
       <View style={{flex: 1,}}>
         <Text style={textStyles.title}>{event.name}</Text>
         <Text style={textStyles.label}>{getTimeFrame(event.datetime_start, event.datetime_end)}</Text>
         {lecturerLabel}
         <Text style={textStyles.label}>Sala: {event.room}</Text>
+      </View>
+      <View style={{justifyContent: "center"}}>
+        <MaterialCommunityIcons name="chevron-right" size={32} color={doesTakePlaceNow ? "white" : "black"}/>
       </View>
     </View>
     {currentDate > event.datetime_end && <View style={styles.inactiveEventOverlay}/>}
@@ -68,13 +65,17 @@ const styles = StyleSheet.create({
   outerContainer: {
     marginHorizontal: 16,
     marginVertical: 8,
-    borderRadius: 8,
+    borderRadius: 12,
     elevation: 8,
     backgroundColor: "white",
     overflow: "hidden",
+    flexDirection: 'row',
   },
   innerContainer: {
-    padding: 16,
+    flex: 1,
+    paddingVertical: 16,
+    paddingRight: 4,
+    paddingLeft: 12,
     flexDirection: 'row',
   },
   inactiveEventOverlay: {
@@ -85,12 +86,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#ccc",
   },
   eventTypeIndicatorTemplate: {
-    borderRadius: 8,
-    flex: 1,
+    width: 12,
   },
-  eventTypeIndicatorContainer: {
-    width: 24,
-    marginRight: 8,
-    alignItems: "flex-end",
-  }
 })
