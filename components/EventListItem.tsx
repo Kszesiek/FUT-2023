@@ -1,8 +1,10 @@
-import {View, Text, StyleSheet, ColorValue} from "react-native";
-import {Event, eventType} from "../screens/Calendar";
+import {View, Text, StyleSheet, ColorValue, TouchableOpacity} from "react-native";
+import {Event, eventType} from "../data/events";
 import {MaterialCommunityIcons} from '@expo/vector-icons';
+import {NavigationProp, useNavigation} from "@react-navigation/native";
+import {MainStackParamList} from "../navigation/MainStackNavigator";
 
-function getTimeFrame(start: Date, end: Date) {
+export function getTimeFrame(start: Date, end: Date) {
   const timeDifference = end.getTime() - start.getTime();
   const durationHours = Math.floor(timeDifference / 3600000);
   const hoursLabel = durationHours > 0 ? `${durationHours}h` : "";
@@ -16,9 +18,13 @@ function getTimeFrame(start: Date, end: Date) {
   return timeRange + " " + durationLabel;
 }
 
-export function EventListItem<T extends eventType>(event: Event<T>) {
+export function EventListItem<T extends eventType>({event, disableHighlight = false}: {
+  event: Event<T>
+  disableHighlight?: boolean
+}) {
+  const navigation = useNavigation<NavigationProp<MainStackParamList>>();
   const currentDate = new Date("2023-10-14T16:00:00.000Z");
-  const doesTakePlaceNow: boolean = event.datetime_start < currentDate && currentDate < event.datetime_end
+  const doesTakePlaceNow: boolean = disableHighlight ? false : event.datetime_start < currentDate && currentDate < event.datetime_end
   const textStyles = StyleSheet.create({
     title: {
       fontSize: 18,
@@ -44,11 +50,16 @@ export function EventListItem<T extends eventType>(event: Event<T>) {
     return <View style={[styles.eventTypeIndicatorTemplate, {backgroundColor: backgroundColor[event.type]}]}/>
   }
 
-  return <View style={[styles.outerContainer, doesTakePlaceNow && {backgroundColor: "#AA0132"}]}>
+  return <TouchableOpacity
+    style={[styles.outerContainer, doesTakePlaceNow && {backgroundColor: "#AA0132"}]}
+    activeOpacity={0.6}
+    key={event.name}
+    onPress={() => navigation.navigate('EventDetails', {eventId: event.name})}
+  >
     {getEventTypeIndicator()}
-    <View style={[styles.innerContainer, doesTakePlaceNow && {backgroundColor: "#AA0132"}]}>
+    <View style={styles.innerContainer}>
       <View style={{flex: 1,}}>
-        <Text style={textStyles.title}>{event.name}</Text>
+        <Text style={textStyles.title} numberOfLines={3} ellipsizeMode='tail'>{event.name}</Text>
         <Text style={textStyles.label}>{getTimeFrame(event.datetime_start, event.datetime_end)}</Text>
         {lecturerLabel}
         <Text style={textStyles.label}>Sala: {event.room}</Text>
@@ -57,14 +68,12 @@ export function EventListItem<T extends eventType>(event: Event<T>) {
         <MaterialCommunityIcons name="chevron-right" size={32} color={doesTakePlaceNow ? "white" : "black"}/>
       </View>
     </View>
-    {currentDate > event.datetime_end && <View style={styles.inactiveEventOverlay}/>}
-  </View>;
+    {currentDate > event.datetime_end && !disableHighlight && <View style={styles.inactiveEventOverlay}/>}
+  </TouchableOpacity>;
 }
 
 const styles = StyleSheet.create({
   outerContainer: {
-    marginHorizontal: 16,
-    marginVertical: 8,
     borderRadius: 12,
     elevation: 8,
     backgroundColor: "white",
@@ -73,6 +82,7 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
+    borderRadius: 12,
     paddingVertical: 16,
     paddingRight: 4,
     paddingLeft: 12,

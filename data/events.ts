@@ -1,8 +1,3 @@
-import {FlatList, View} from "react-native";
-import * as React from "react";
-import {EventListItem} from "../components/EventListItem";
-import {useEffect, useRef} from "react";
-
 export type eventType = "lecture" | "main event" | undefined;
 
 export interface Event<EventType extends eventType> {
@@ -14,7 +9,7 @@ export interface Event<EventType extends eventType> {
   room: string,
 }
 
-const events: Array<Event<eventType>> = [
+export const events: Array<Event<eventType>> = [
   {
     name: "Jak to jest być w Kolegium, dobrze?",
     type: "lecture",
@@ -100,41 +95,3 @@ const events: Array<Event<eventType>> = [
     room: "Mała Aula (237, II piętro)",
   },
 ]
-
-export function CalendarScreen() {
-  const flatListRef = useRef<FlatList>(null);
-  const currentDate = new Date("2023-10-14T16:00:00.000Z");
-
-  useEffect(() => {
-    if (currentDate < events[0].datetime_start)
-      return;
-    if (flatListRef.current) {
-      events.every((event, index) => {
-        if (event.datetime_start > currentDate) {
-          flatListRef.current?.scrollToIndex({animated: true, index: index});
-          return;
-        }
-      });
-      flatListRef.current?.scrollToIndex({animated: true, index: events.length - 1});
-    }
-  }, [flatListRef]);
-
-  return (
-    <View style={{flex: 1}}>
-      <FlatList
-        data={events}
-        keyExtractor={(item, index) => {
-          return index.toString();
-        }}
-        ref={flatListRef}
-        getItemLayout={(data, index) => {
-          return {length: 128, offset: 128 * index, index};
-        }}
-        contentContainerStyle={{flexGrow: 1, paddingVertical: 8,}}
-        renderItem={({item}) => {
-          return EventListItem(item);
-        }}
-      />
-    </View>
-  );
-}
