@@ -4,7 +4,7 @@ import {EventListItem} from "../components/EventListItem";
 import {useEffect, useRef} from "react";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {MainStackParamList} from "../navigation/MainStackNavigator";
-import {events} from "../data/events";
+import {events} from "../constants/events";
 
 export function ScheduleScreen({route, navigation}: NativeStackScreenProps<MainStackParamList, 'Schedule'>) {
   const flatListRef = useRef<FlatList>(null);

@@ -1,28 +1,36 @@
 import {HomeScreen} from "../screens/Home";
-import {Image, SafeAreaView, View} from "react-native";
+import {Image, View} from "react-native";
 import {ScheduleScreen} from "../screens/Schedule";
 import {EventDetailsScreen} from "../screens/EventDetails";
 import * as React from "react";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {colors} from "../constants/colors";
 
 export type MainStackParamList = {
   Home: undefined
   Schedule: undefined
-  EventDetails: { eventId: string }
+  EventDetails: { eventName: string }
 };
 
 export function MainStackNavigator() {
   const Stack = createNativeStackNavigator<MainStackParamList>();
   const insets = useSafeAreaInsets();
 
-  return <Stack.Navigator>
+  return <Stack.Navigator
+  screenOptions={{
+    statusBarColor: colors.accent_dark as string,
+    headerTintColor: "white",
+    headerStyle: {
+      backgroundColor: colors.accent_dark as string,
+    }
+  }}>
     <Stack.Screen
       name="Home"
       component={HomeScreen}
       options={{
-        header: () => <>
-          <View style={{paddingTop: insets.top}}>
+        header: () =>
+          <View style={{paddingTop: insets.top, elevation: 12, backgroundColor: colors.accent_dark as string,}}>
             <Image
               source={require("../assets/fut_logo_wide.png")}
               resizeMode={"contain"}
@@ -31,8 +39,7 @@ export function MainStackNavigator() {
                 height: 80,
               }}
             />
-          </View>
-        </>
+          </View>,
       }}
     />
     <Stack.Screen

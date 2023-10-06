@@ -4,7 +4,8 @@ import {FontAwesome, AntDesign} from "@expo/vector-icons";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {MainStackParamList} from "../navigation/MainStackNavigator";
 import {EventListItem} from "../components/EventListItem";
-import {events} from "../data/events";
+import {events} from "../constants/events";
+import {colors} from "../constants/colors";
 
 export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStackParamList, 'Home'>) {
   const currentDate = new Date("2023-10-14T12:10:00.000Z");
@@ -54,7 +55,7 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
 const styles = StyleSheet.create({
   scheduleButton: {
     borderRadius: 100,
-    backgroundColor: "#AA0132",
+    backgroundColor: colors.accent_dark,
     alignSelf: "flex-end",
     alignItems: 'center',
     paddingVertical: 12,
@@ -73,6 +74,6 @@ const textStyles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontFamily: 'Montserrat_500Medium',
+    fontFamily: 'Ubuntu_400Regular',
   },
 });

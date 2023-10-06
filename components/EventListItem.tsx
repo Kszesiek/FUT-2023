@@ -1,22 +1,10 @@
 import {View, Text, StyleSheet, ColorValue, TouchableOpacity} from "react-native";
-import {Event, eventType} from "../data/events";
+import {Event, eventType, getEventTypeColor} from "../constants/events";
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {MainStackParamList} from "../navigation/MainStackNavigator";
-
-export function getTimeFrame(start: Date, end: Date) {
-  const timeDifference = end.getTime() - start.getTime();
-  const durationHours = Math.floor(timeDifference / 3600000);
-  const hoursLabel = durationHours > 0 ? `${durationHours}h` : "";
-  const durationMinutes = (timeDifference % 3600000) / 60000;
-  const minutesLabel = durationMinutes > 0 ? `${durationMinutes}min` : "";
-  const spaceInDuration = durationHours > 0 && durationMinutes > 0 ? " " : "";
-
-  const timeRange = `${start.getHours()}:${start.getMinutes().toString().padStart(2, '0')} - ${end.getHours()}:${end.getMinutes().toString().padStart(2, '0')}`;
-  const durationLabel = `(${hoursLabel}${spaceInDuration}${minutesLabel})`;
-
-  return timeRange + " " + durationLabel;
-}
+import {colors} from "../constants/colors";
+import {getTimeFrame} from "../constants/time";
 
 export function EventListItem<T extends eventType>({event, disableHighlight = false}: {
   event: Event<T>
@@ -41,20 +29,15 @@ export function EventListItem<T extends eventType>({event, disableHighlight = fa
     <Text style={textStyles.label}>Prowadzący: {event.lecturer}</Text> : <></>;
 
   function getEventTypeIndicator() {
-    const backgroundColor: { [key in keyof eventType]: ColorValue } = {
-      "main event": "#F29F05",
-      "lecture": "#A387D7",
-      undefined: "#888",
-    };
-
-    return <View style={[styles.eventTypeIndicatorTemplate, {backgroundColor: backgroundColor[event.type]}]}/>
+    const backgroundColor: ColorValue = getEventTypeColor(event.type);
+    return <View style={[styles.eventTypeIndicatorTemplate, {backgroundColor: backgroundColor}]}/>
   }
 
   return <TouchableOpacity
-    style={[styles.outerContainer, doesTakePlaceNow && {backgroundColor: "#AA0132"}]}
+    style={[styles.outerContainer, doesTakePlaceNow && {backgroundColor: colors.accent_dark}]}
     activeOpacity={0.6}
     key={event.name}
-    onPress={() => navigation.navigate('EventDetails', {eventId: event.name})}
+    onPress={() => navigation.navigate('EventDetails', {eventName: event.name})}
   >
     {getEventTypeIndicator()}
     <View style={styles.innerContainer}>
@@ -62,7 +45,7 @@ export function EventListItem<T extends eventType>({event, disableHighlight = fa
         <Text style={textStyles.title} numberOfLines={3} ellipsizeMode='tail'>{event.name}</Text>
         <Text style={textStyles.label}>{getTimeFrame(event.datetime_start, event.datetime_end)}</Text>
         {lecturerLabel}
-        <Text style={textStyles.label}>Sala: {event.room}</Text>
+        <Text style={textStyles.label}>Miejsce: {event.place}</Text>
       </View>
       <View style={{justifyContent: "center"}}>
         <MaterialCommunityIcons name="chevron-right" size={32} color={doesTakePlaceNow ? "white" : "black"}/>
@@ -82,7 +65,6 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    borderRadius: 12,
     paddingVertical: 16,
     paddingRight: 4,
     paddingLeft: 12,
