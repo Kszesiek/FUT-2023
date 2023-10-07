@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.accent_dark,
     alignSelf: "flex-end",
     alignItems: 'center',
-    paddingVertical: 12,
+    paddingVertical: 16,
     paddingLeft: 24,
     paddingRight: 20,
     marginTop: 12,

@@ -10,6 +10,8 @@ export interface Event<EventType extends eventType> {
   datetime_end: Date,
   place: string,
   description?: string,
+  basic_or_extended?: "basic" | "extended",
+  dress_code?: string,
 }
 
 export const events: Array<Event<eventType>> = [
@@ -20,6 +22,7 @@ export const events: Array<Event<eventType>> = [
     datetime_start: new Date("2023-10-14T10:15:00.000Z"),
     datetime_end: new Date("2023-10-14T11:45:00.000Z"),
     place: "165",
+    basic_or_extended: 'basic',
   },
   {
     name: "Bingowanie to moja pasja. Jak w dwa księżyce napisać aplikację na FUT?",
@@ -28,6 +31,7 @@ export const events: Array<Event<eventType>> = [
     datetime_start: new Date("2023-10-14T10:45:00.000Z"),
     datetime_end: new Date("2023-10-14T12:15:00.000Z"),
     place: "165",
+    basic_or_extended: 'extended',
   },
   {
     name: "Wykład o krążeniu materii",
@@ -36,6 +40,7 @@ export const events: Array<Event<eventType>> = [
     datetime_start: new Date("2023-10-14T11:15:00.000Z"),
     datetime_end: new Date("2023-10-14T12:45:00.000Z"),
     place: "Mała Aula (sala 237, II piętro)",
+    basic_or_extended: 'basic',
   },
   {
     name: "Energetyka jądrowa dla opornych",
@@ -44,6 +49,7 @@ export const events: Array<Event<eventType>> = [
     datetime_start: new Date("2023-10-14T11:45:00.000Z"),
     datetime_end: new Date("2023-10-14T13:15:00.000Z"),
     place: "231",
+    basic_or_extended: 'extended',
   },
   {
     name: "Dogłębna analiza obsługi projektorów i rzutników w salach wykładowych",
@@ -52,6 +58,7 @@ export const events: Array<Event<eventType>> = [
     datetime_start: new Date("2023-10-14T12:15:00.000Z"),
     datetime_end: new Date("2023-10-14T13:45:00.000Z"),
     place: "123",
+    basic_or_extended: 'basic',
   },
   {
     name: "Wszystko, wszędzie, na raz. Jak ogarniać w bycie przewodniczącym Samorządu Studentów, czyli życie na krawędzi załamania psychicznego, ale przynajmniej historie są ciekawe!",
@@ -60,6 +67,7 @@ export const events: Array<Event<eventType>> = [
     datetime_start: new Date("2023-10-14T12:45:00.000Z"),
     datetime_end: new Date("2023-10-14T14:15:00.000Z"),
     place: "165",
+    basic_or_extended: 'extended',
   },
   {
     name: "Proszę państwa: drzewa. Co wynieśliśmy z edukacji zdalnej podczas pandemii?",
@@ -68,6 +76,7 @@ export const events: Array<Event<eventType>> = [
     datetime_start: new Date("2023-10-14T13:15:00.000Z"),
     datetime_end: new Date("2023-10-14T14:45:00.000Z"),
     place: "234",
+    basic_or_extended: 'basic',
   },
   {
     name: "Gala Forum Uczelni Technicznych - część 1",

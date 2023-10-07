@@ -47,6 +47,7 @@ export function MainStackNavigator() {
       component={ScheduleScreen}
       options={{
         title: "Wydarzenia"
+        headerShadowVisible: false,
       }}
     />
     <Stack.Screen
