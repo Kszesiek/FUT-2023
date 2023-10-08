@@ -11,7 +11,7 @@ export function EventListItem<T extends eventType>({event, disableHighlight = fa
   disableHighlight?: boolean
 }) {
   const navigation = useNavigation<NavigationProp<MainStackParamList>>();
-  const currentDate = new Date("2023-10-14T16:00:00.000Z");
+  const currentDate = new Date("2023-10-10T12:00:00.000Z");
   const doesTakePlaceNow: boolean = disableHighlight ? false : event.datetime_start < currentDate && currentDate < event.datetime_end
   const textStyles = StyleSheet.create({
     title: {
@@ -37,7 +37,7 @@ export function EventListItem<T extends eventType>({event, disableHighlight = fa
     style={[styles.outerContainer, doesTakePlaceNow && {backgroundColor: colors.accent_dark}]}
     activeOpacity={0.6}
     key={event.name}
-    onPress={() => navigation.navigate('EventDetails', {eventName: event.name})}
+    onPress={() => navigation.navigate('EventDetails', {eventId: event.id})}
   >
     {getEventTypeIndicator()}
     <View style={styles.innerContainer}>
@@ -45,7 +45,7 @@ export function EventListItem<T extends eventType>({event, disableHighlight = fa
         <Text style={textStyles.title} numberOfLines={3} ellipsizeMode='tail'>{event.name}</Text>
         <Text style={textStyles.label}>{getTimeFrame(event.datetime_start, event.datetime_end)}</Text>
         {lecturerLabel}
-        <Text style={textStyles.label}>Miejsce: {event.place}</Text>
+        {!!event.place && <Text style={textStyles.label}>Miejsce: {event.place}</Text>}
       </View>
       <View style={{justifyContent: "center"}}>
         <MaterialCommunityIcons name="chevron-right" size={32} color={doesTakePlaceNow ? "white" : "black"}/>

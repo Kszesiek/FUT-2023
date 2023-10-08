@@ -1,4 +1,10 @@
+export const weekday = ["Niedziela","Poniedziałek","Wtorek","Środa","Czwartek","Piątek","Sobota"];
+
 export function getTimeFrame(start: Date, end: Date) {
+  if (start.getTime() === end.getTime()) {
+    return `${start.getHours()}:${start.getMinutes().toString().padStart(2, '0')}`;
+  }
+
   const timeDifference = end.getTime() - start.getTime();
   const durationHours = Math.floor(timeDifference / 3600000);
   const hoursLabel = durationHours > 0 ? `${durationHours}h` : "";

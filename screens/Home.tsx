@@ -41,7 +41,7 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
           </View>
       }
       <TouchableOpacity style={styles.scheduleButton} onPress={() => navigation.navigate('Schedule')}>
-        <Text style={textStyles.scheduleButtonText}>Zobacz wszystkie wydarzenia</Text>
+        <Text style={textStyles.scheduleButtonText}>Zobacz pełny harmonogram</Text>
         {/*<FontAwesome name="chevron-right" size={14} color="white"/>*/}
         <AntDesign name="arrowright" size={18} color="white"/>
       </TouchableOpacity>
@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 20,
     marginTop: 12,
-    flexDirection: "row"
+    flexDirection: "row",
+    elevation: 12,
   },
 });
 

@@ -1,16 +1,16 @@
 import {HomeScreen} from "../screens/Home";
-import {Image, View} from "react-native";
+import {Image, TouchableOpacity, View} from "react-native";
 import {ScheduleScreen} from "../screens/Schedule";
 import {EventDetailsScreen} from "../screens/EventDetails";
 import * as React from "react";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {colors} from "../constants/colors";
-
+import {SimpleLineIcons} from '@expo/vector-icons';
 export type MainStackParamList = {
   Home: undefined
   Schedule: undefined
-  EventDetails: { eventName: string }
+  EventDetails: { eventId: string }
 };
 
 export function MainStackNavigator() {
@@ -46,7 +46,7 @@ export function MainStackNavigator() {
       name="Schedule"
       component={ScheduleScreen}
       options={{
-        title: "Wydarzenia"
+        title: "Harmonogram",
         headerShadowVisible: false,
       }}
     />
