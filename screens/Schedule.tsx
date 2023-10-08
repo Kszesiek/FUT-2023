@@ -89,7 +89,7 @@ export function ScheduleScreen({route, navigation}: NativeStackScreenProps<MainS
           paddingVertical: 8,
           paddingHorizontal: 16,
         }}
-        renderItem={({item, index, separators}) => {
+        renderItem={({item}) => {
           const weekdayHeaderComponent = item.datetime_start.getDay() !== lastWeekday.getDay() ? getWeekdayHeader(item.datetime_start) : undefined;
           lastWeekday = item.datetime_start;
 

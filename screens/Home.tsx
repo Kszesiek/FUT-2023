@@ -1,6 +1,6 @@
-import {Text, View, ScrollView, TouchableOpacity, StyleSheet} from "react-native";
+import {Text, View, ScrollView, TouchableOpacity, StyleSheet, Image} from "react-native";
 import * as React from "react";
-import {FontAwesome, AntDesign} from "@expo/vector-icons";
+import {AntDesign} from "@expo/vector-icons";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {MainStackParamList} from "../navigation/MainStackNavigator";
 import {EventListItem} from "../components/EventListItem";
@@ -20,7 +20,7 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
         eventsStartingSoon.length > 0 ?
           eventsStartingSoon.map((event) =>
             <View key={event.name} style={{marginVertical: 8}}>
-              <EventListItem event={event} disableHighlight={true} />
+              <EventListItem event={event} disableHighlight={true}/>
             </View>
           ) :
           <View style={{paddingVertical: 16, alignItems: 'center'}}>
@@ -33,7 +33,7 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
         eventsTakingPlaceNow.length > 0 ?
           eventsTakingPlaceNow.map((event) =>
             <View key={event.name} style={{marginVertical: 8}}>
-              <EventListItem event={event} disableHighlight={true} />
+              <EventListItem event={event} disableHighlight={true}/>
             </View>)
           :
           <View style={{paddingVertical: 16, alignItems: 'center'}}>
@@ -47,7 +47,27 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
       </TouchableOpacity>
       <View style={{height: 40}}/>
       <View style={{flex: 1}}/>
-      <Text style={textStyles.title}>Sponsorzy</Text>
+      <Text style={textStyles.title}>Partnerzy wydarzenia</Text>
+      <View>
+        <View style={styles.sponsorsRow}>
+            <Image style={{...styles.sponsorLogo, aspectRatio: 1.765}}
+                   source={require('../assets/sponsors/redbull.png')}/>
+            <Image style={{...styles.sponsorLogo, aspectRatio: 1}}
+                   source={require('../assets/sponsors/nescafe.png')}/>
+        </View>
+        <View style={styles.sponsorsRow}>
+          <Image style={{...styles.sponsorLogo, aspectRatio: 3}}
+                 source={require('../assets/sponsors/nicks.png')}/>
+          <Image style={{...styles.sponsorLogo, aspectRatio: 5}}
+                 source={require('../assets/sponsors/Subway.png')}/>
+        </View>
+        <View style={styles.sponsorsRow}>
+          <Image style={{...styles.sponsorLogo, aspectRatio: 2.2}}
+                 source={require('../assets/sponsors/reflectgroup.png')}/>
+          <Image style={{...styles.sponsorLogo, aspectRatio: 4}}
+                 source={require('../assets/sponsors/KS-Distribution.png')}/>
+        </View>
+      </View>
     </ScrollView>
   );
 }
@@ -64,6 +84,19 @@ const styles = StyleSheet.create({
     marginTop: 12,
     flexDirection: "row",
     elevation: 12,
+  },
+  sponsorsRow: {
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: "center",
+    paddingVertical: 8,
+  },
+  sponsorLogo: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
+    resizeMode: 'contain',
+    marginHorizontal: 12,
   },
 });
 
