@@ -4,7 +4,7 @@
     "slug": "FUT-2023",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/fut_icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/fut_logo_splash_512.png",

@@ -11,7 +11,7 @@ import {weekday} from "../constants/time";
 import {SimpleLineIcons} from "@expo/vector-icons";
 
 export function ScheduleScreen({route, navigation}: NativeStackScreenProps<MainStackParamList, 'Schedule'>) {
-  const currentDate = new Date("2023-10-10T12:00:00.000Z");
+  const currentDate = new Date("2023-10-14T12:00:00.000Z");
   const flatListRef = useRef<FlatList>(null);
   const [isHelpModalVisible, setIsHelpModalVisible] = useState(false);
   const [basicOrExtended, setBasicOrExtended] = useState<"basic" | "extended">("basic");

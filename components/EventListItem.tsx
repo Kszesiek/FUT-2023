@@ -12,7 +12,7 @@ export function EventListItem<T extends eventType>({event, disableHighlight = fa
   disableHighlight?: boolean
 }) {
   const navigation = useNavigation<NavigationProp<MainStackParamList>>();
-  const currentDate = new Date("2023-10-10T12:00:00.000Z");
+  const currentDate = new Date("2023-10-14T12:00:00.000Z");
   const doesTakePlaceNow: boolean = disableHighlight ? false : event.datetime_start < currentDate && currentDate < event.datetime_end;
   const location: Location | undefined = locations.find((location) => location.id === event?.locationId);
 
