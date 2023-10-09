@@ -47,6 +47,7 @@ export function MainStackNavigator() {
                   width: 60,
                   height: 60,
                   flex: 1,
+                  marginHorizontal: 4,
                 }}
               />
               <Image
@@ -56,6 +57,7 @@ export function MainStackNavigator() {
                   width: 70,
                   height: 70,
                   flex: 1,
+                  marginHorizontal: 4,
                 }}
               />
             </View>
