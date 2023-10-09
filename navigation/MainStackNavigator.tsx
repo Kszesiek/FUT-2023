@@ -46,7 +46,6 @@ export function MainStackNavigator() {
                 style={{
                   width: 60,
                   height: 60,
-                  flex: 1,
                   marginHorizontal: 4,
                 }}
               />
@@ -56,7 +55,6 @@ export function MainStackNavigator() {
                 style={{
                   width: 70,
                   height: 70,
-                  flex: 1,
                   marginHorizontal: 4,
                 }}
               />

@@ -15,9 +15,9 @@ import {MainStackParamList} from "../navigation/MainStackNavigator";
 import {EventListItem} from "../components/EventListItem";
 import {events} from "../constants/events";
 import {colors} from "../constants/colors";
+import {currentDate} from "../constants/time";
 
 export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStackParamList, 'Home'>) {
-  const currentDate = new Date("2023-10-14T12:10:00.000Z");
   const minutes_before = 1800000;
   const eventsStartingSoon = events.filter((event) => event.datetime_start.getTime() - currentDate.getTime() < minutes_before && currentDate < event.datetime_start);
   const eventsTakingPlaceNow = events.filter((event) => event.datetime_start < currentDate && currentDate < event.datetime_end);
@@ -62,9 +62,9 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
       <Text style={textStyles.title}>Partnerzy wydarzenia</Text>
       <View>
         <View style={styles.sponsorsRow}>
-          <Image style={{...styles.sponsorLogo, aspectRatio: 1.765}}
+          <Image style={{...styles.sponsorLogo, aspectRatio: 1.765,}}
                  source={require('../assets/sponsors/redbull.png')}/>
-          <Image style={{...styles.sponsorLogo, aspectRatio: 1}}
+          <Image style={{...styles.sponsorLogo, aspectRatio: 1,}}
                  source={require('../assets/sponsors/nescafe.png')}/>
         </View>
         <View style={styles.sponsorsRow}>
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     alignItems: "center",
+    justifyContent: 'center',
     paddingVertical: 8,
   },
   sponsorLogo: {
@@ -113,6 +114,7 @@ const styles = StyleSheet.create({
     height: undefined,
     resizeMode: 'contain',
     marginHorizontal: 12,
+    maxWidth: 300,
   },
 });
 

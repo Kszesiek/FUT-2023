@@ -7,15 +7,16 @@ import {MainStackParamList} from "../navigation/MainStackNavigator";
 import {events, Event, possibleEventTypes, getEventTypeColor, eventTypeName} from "../constants/events";
 import HighlightChooser from "../components/HighlightChooser";
 import {colors} from "../constants/colors";
-import {weekday} from "../constants/time";
+import {currentDate, weekday} from "../constants/time";
 import {SimpleLineIcons} from "@expo/vector-icons";
 
 export function ScheduleScreen({route, navigation}: NativeStackScreenProps<MainStackParamList, 'Schedule'>) {
-  const currentDate = new Date("2023-10-14T12:00:00.000Z");
   const flatListRef = useRef<FlatList>(null);
   const [isHelpModalVisible, setIsHelpModalVisible] = useState(false);
   const [basicOrExtended, setBasicOrExtended] = useState<"basic" | "extended">("basic");
-  const [displayEvents, setDisplayEvents] = useState<Array<Event<any>>>(events.filter((event) => event.basic_or_extended === undefined || event.basic_or_extended === basicOrExtended));
+  const basicEvents = events.filter((event) => event.basic_or_extended === undefined || event.basic_or_extended === 'basic');
+  const extendedEvents = events.filter((event) => event.basic_or_extended === undefined || event.basic_or_extended === 'extended');
+
   let lastWeekday = {
     getDay() {
       return -1;
@@ -23,21 +24,22 @@ export function ScheduleScreen({route, navigation}: NativeStackScreenProps<MainS
   };
 
   useEffect(() => {
-    if (currentDate < events[0].datetime_start)
+    const displayEvents = basicOrExtended === "basic" ? basicEvents : extendedEvents;
+    if (currentDate < displayEvents[0].datetime_start)
       return;
     if (flatListRef.current) {
-      displayEvents.every((event, index) => {
-        if (event.datetime_start > currentDate) {
-          flatListRef.current?.scrollToIndex({animated: false, index: index});
-          return;
+      let nearestEventIndex: number | undefined = undefined;
+      let lastDate: Date = new Date(2023, 1, 1);
+      displayEvents.forEach((event, index) => {
+        if (event.datetime_start < currentDate && event.datetime_start.getTime() !== lastDate.getTime()) {
+          console.log(`${index}, ${event.datetime_start}`);
+          nearestEventIndex = index;
+          lastDate = event.datetime_start;
         }
       });
-      flatListRef.current?.scrollToIndex({animated: false, index: displayEvents.length - 1});
+      const index = nearestEventIndex !== undefined ? nearestEventIndex : displayEvents.length - 1;
+      flatListRef.current?.scrollToIndex({animated: false, index: index});
     }
-  }, [flatListRef]);
-
-  useEffect(() => {
-    setDisplayEvents((events.filter((event) => event.basic_or_extended === undefined || event.basic_or_extended === basicOrExtended)));
   }, [basicOrExtended]);
 
   React.useLayoutEffect(() => {
@@ -76,13 +78,11 @@ export function ScheduleScreen({route, navigation}: NativeStackScreenProps<MainS
         />
       </View>
       <FlatList
-        data={displayEvents}
-        keyExtractor={(item, index) => {
-          return index.toString();
-        }}
+        data={basicOrExtended === 'basic' ? basicEvents : extendedEvents} // basicOrExtended === 'basic' ? basicEvents : extendedEvents} // displayEvents
+        keyExtractor={(item) => item.id}
         ref={flatListRef}
         getItemLayout={(data, index) => {
-          return {length: 128, offset: 128 * index, index};
+          return {length: 110, offset: 110 * index, index};
         }}
         contentContainerStyle={{
           flexGrow: 1,
