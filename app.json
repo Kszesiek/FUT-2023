@@ -7,7 +7,7 @@
     "icon": "./assets/fut_icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/fut_logo_splash_512.png",
+      "image": "./assets/fut_splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#830628"
     },
@@ -19,12 +19,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/fut_splash.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.kszesiek.FUT2023"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/fut_icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2fc719ff-b3d4-4ead-b760-f1d0ad084641"
+      }
     }
   }
 }
