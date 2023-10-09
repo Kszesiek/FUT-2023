@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/fut_splash.png",
+        "foregroundImage": "./assets/fut_icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.kszesiek.FUT2023"

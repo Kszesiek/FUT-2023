@@ -18,7 +18,7 @@ import {colors} from "../constants/colors";
 import {currentDate} from "../constants/time";
 
 export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStackParamList, 'Home'>) {
-  const minutes_before = 1800000;
+  const minutes_before = 60 * 60 * 1000;
   const eventsStartingSoon = events.filter((event) => event.datetime_start.getTime() - currentDate.getTime() < minutes_before && currentDate < event.datetime_start);
   const eventsTakingPlaceNow = events.filter((event) => event.datetime_start < currentDate && currentDate < event.datetime_end);
 
@@ -62,20 +62,41 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
       <Text style={textStyles.title}>Partnerzy wydarzenia</Text>
       <View>
         <View style={styles.sponsorsRow}>
-          <Image style={{...styles.sponsorLogo, aspectRatio: 1.765,}}
-                 source={require('../assets/sponsors/redbull.png')}/>
-          <Image style={{...styles.sponsorLogo, aspectRatio: 1,}}
-                 source={require('../assets/sponsors/nescafe.png')}/>
+          <TouchableWithoutFeedback onPress={() => {
+            Linking.openURL('https://www.redbull.com/pl-pl/?rbcid=19716337114&utm_source=Adwords&utm_medium=g&utm_campaign=19716337114&utm_content=648869728010&gclid=CjwKCAjwyY6pBhA9EiwAMzmfwXLP6KmHIGzz_Bhsip6qXSTZhUOVviEDwCc_VXn3Okz6ddakjyrviBoC2CgQAvD_BwE')
+          }}>
+            <Image style={{...styles.sponsorLogo, aspectRatio: 1.765,}}
+                   source={require('../assets/sponsors/redbull.png')}/>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => {
+            Linking.openURL('https://www.nescafe.com/pl/')
+          }}>
+            <Image style={{...styles.sponsorLogo, aspectRatio: 1,}}
+                   source={require('../assets/sponsors/nescafe.png')}/>
+          </TouchableWithoutFeedback>
         </View>
         <View style={styles.sponsorsRow}>
-          <Image style={{...styles.sponsorLogo, aspectRatio: 3}}
-                 source={require('../assets/sponsors/nicks.png')}/>
-          <Image style={{...styles.sponsorLogo, aspectRatio: 5}}
-                 source={require('../assets/sponsors/Subway.png')}/>
+          <TouchableWithoutFeedback onPress={() => {
+            Linking.openURL('https://www.instagram.com/ksdistribution_official/#')
+          }}>
+            <Image style={{...styles.sponsorLogo, aspectRatio: 3}}
+                   source={require('../assets/sponsors/nicks.png')}/>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => {
+            Linking.openURL('https://mysubway.pl/')
+          }}>
+            <Image style={{...styles.sponsorLogo, aspectRatio: 5}}
+                   source={require('../assets/sponsors/Subway.png')}/>
+          </TouchableWithoutFeedback>
         </View>
         <View style={styles.sponsorsRow}>
-          <Image style={{...styles.sponsorLogo, aspectRatio: 2.2}}
-                 source={require('../assets/sponsors/reflectgroup.png')}/>
+          <TouchableWithoutFeedback onPress={() => {
+            Linking.openURL('https://www.reflect.pl/')
+          }}>
+            <Image style={{...styles.sponsorLogo, aspectRatio: 2.2}}
+                   source={require('../assets/sponsors/reflectgroup.png')}/>
+
+          </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={() => {
             Linking.openURL('https://www.instagram.com/ksdistribution_official/#')
           }}>

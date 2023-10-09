@@ -34,3 +34,4 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 /FUT ustalenia.txt
+assets_old/

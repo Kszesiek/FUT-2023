@@ -1,4 +1,13 @@
-import {FlatList, View, Text, StyleSheet, TouchableOpacity, Modal, TouchableWithoutFeedback} from "react-native";
+import {
+  FlatList,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+  TouchableWithoutFeedback,
+  Platform
+} from "react-native";
 import * as React from "react";
 import {EventListItem} from "../components/EventListItem";
 import {useEffect, useRef, useState} from "react";
@@ -32,7 +41,6 @@ export function ScheduleScreen({route, navigation}: NativeStackScreenProps<MainS
       let lastDate: Date = new Date(2023, 1, 1);
       displayEvents.forEach((event, index) => {
         if (event.datetime_start < currentDate && event.datetime_start.getTime() !== lastDate.getTime()) {
-          console.log(`${index}, ${event.datetime_start}`);
           nearestEventIndex = index;
           lastDate = event.datetime_start;
         }
@@ -45,7 +53,7 @@ export function ScheduleScreen({route, navigation}: NativeStackScreenProps<MainS
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => setIsHelpModalVisible(!isHelpModalVisible)}>
+        <TouchableOpacity style={Platform.OS === "web" && {marginRight: 16}} onPress={() => setIsHelpModalVisible(!isHelpModalVisible)}>
           <SimpleLineIcons name='question' size={24} color='white'/>
         </TouchableOpacity>
       ),

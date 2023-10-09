@@ -1,5 +1,6 @@
-import {Image, Linking, TouchableOpacity, View} from "react-native";
+import {Image, Linking, TouchableOpacity, View, Dimensions} from "react-native";
 import {Location} from "../constants/locations";
+import {useState} from "react";
 
 const GOOGLE_API_KEY = 'AIzaSyDMq-TWPgd_jxqNCXAoND0Gq4rlr2RvvZI';
 
@@ -16,7 +17,10 @@ function getMapPreview(location: Location) {
 export default function MapDisplay({location}: { location: Location }) {
   const address = getMapPreview(location);
   console.log(address);
-  return <View style={{backgroundColor: 'gray'}}>
+  const maxWidth = Math.min(Dimensions.get('window').width * 0.5, 866);
+  const [didMapLoad, setDidMapLoad] = useState<boolean>(false);
+
+  return <View style={{backgroundColor: didMapLoad ? 'gray' : 'white'}}>
     <TouchableOpacity
       onPress={() => {
         const url = !!location.googleMapsLink ? location.googleMapsLink : `https://maps.google.com/?q=${location.x},${location.y}`
@@ -26,12 +30,12 @@ export default function MapDisplay({location}: { location: Location }) {
       style={{
         flex: 1,
         aspectRatio: 1,
-        backgroundColor: 'gray',
         alignItems: 'center',
         justifyContent: 'center'
       }}
     >
-      <Image source={{uri: address}} style={{width: "150%", height: "150%",}} resizeMode="contain"/>
+      {!didMapLoad && <Image source={require("../assets/google-maps.png")} style={{position: 'absolute', maxWidth: maxWidth, aspectRatio: 1, resizeMode: 'contain'}}/>}
+      <Image source={{uri: address}} style={{width: "150%", height: "150%",}} resizeMode="contain" onLoadEnd={() => {setDidMapLoad(true)}}/>
     </TouchableOpacity>
   </View>
 }

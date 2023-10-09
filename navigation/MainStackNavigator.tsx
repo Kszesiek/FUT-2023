@@ -41,10 +41,10 @@ export function MainStackNavigator() {
               />
               <View style={{flex: 1}}/>
               <Image
-                source={require("../assets/logo_pw.png")}
+                source={require("../assets/sspw.png")}
                 resizeMode={"contain"}
                 style={{
-                  width: 60,
+                  width: 50,
                   height: 60,
                   marginHorizontal: 4,
                 }}
