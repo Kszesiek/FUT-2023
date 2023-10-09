@@ -30,14 +30,35 @@ export function MainStackNavigator() {
       options={{
         header: () =>
           <View style={{paddingTop: insets.top, elevation: 12, backgroundColor: colors.accent_dark as string,}}>
-            <Image
-              source={require("../assets/fut_logo_wide.png")}
-              resizeMode={"contain"}
-              style={{
-                width: 245,
-                height: 80,
-              }}
-            />
+            <View style={{flexDirection: 'row', height: 80, alignItems: 'center'}}>
+              <Image
+                source={require("../assets/fut_logo_wide.png")}
+                resizeMode={"contain"}
+                style={{
+                  width: 229,
+                  height: 80,
+                }}
+              />
+              <View style={{flex: 1}}/>
+              <Image
+                source={require("../assets/logo_pw.png")}
+                resizeMode={"contain"}
+                style={{
+                  width: 60,
+                  height: 60,
+                  flex: 1,
+                }}
+              />
+              <Image
+                source={require("../assets/godlo_wat.png")}
+                resizeMode={"contain"}
+                style={{
+                  width: 70,
+                  height: 70,
+                  flex: 1,
+                }}
+              />
+            </View>
           </View>,
       }}
     />

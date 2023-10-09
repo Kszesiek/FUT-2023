@@ -24,6 +24,9 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
 
   return (
     <ScrollView contentContainerStyle={{padding: 12, flexGrow: 1}}>
+      {/*<Text style={{textAlign: "right"}}>Environment: {process.env.NODE_ENV}</Text>*/}
+      {/*<Text style={{fontStyle: "italic"}}>Product is not indicative of the final version.</Text>*/}
+      {/*<Text style={{fontStyle: "italic"}}>Czy coś tam.</Text>*/}
       <Text style={textStyles.title}>Zaraz się zacznie</Text>
       {
         eventsStartingSoon.length > 0 ?

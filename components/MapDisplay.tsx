@@ -1,5 +1,5 @@
 import {Image, Linking, TouchableOpacity, View} from "react-native";
-import {Location, locations} from "../constants/locations";
+import {Location} from "../constants/locations";
 
 const GOOGLE_API_KEY = 'AIzaSyDMq-TWPgd_jxqNCXAoND0Gq4rlr2RvvZI';
 
