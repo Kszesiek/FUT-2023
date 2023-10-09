@@ -5,9 +5,12 @@ import {MainStackParamList} from "../navigation/MainStackNavigator";
 import {events, eventType, Event, getEventTypeColor, eventTypeName} from "../constants/events";
 import {fonts} from "../constants/fonts";
 import {getTimeFrame} from "../constants/time";
+import MapDisplay from "../components/MapDisplay";
+import {locations, Location} from "../constants/locations";
 
 export function EventDetailsScreen({route, navigation}: NativeStackScreenProps<MainStackParamList, 'EventDetails'>) {
   const event: Event<eventType> | undefined = events.find((event) => event.id === route.params.eventId);
+  const location: Location | undefined = locations.find((location) => location.id === event?.locationId);
 
   if (!event || event === undefined) {
     navigation.goBack();
@@ -26,7 +29,7 @@ export function EventDetailsScreen({route, navigation}: NativeStackScreenProps<M
           </View>
           <Text style={textStyles.label}>Czas trwania: {getTimeFrame(event.datetime_start, event.datetime_end)}</Text>
           {!!event.lecturer && <Text style={textStyles.label}>Prowadzący: {event.lecturer}</Text>}
-          {!!event.place && <Text style={textStyles.label}>Miejsce: {event.place}</Text>}
+          {!!location && <Text style={textStyles.label}>Miejsce: {location.name}{!!event.room && `, ${event.room}`}</Text>}
           {!!event.type && <View style={{flexDirection: 'row'}}>
               <Text style={textStyles.label}>Typ wydarzenia: {eventTypeName.get(event.type)}</Text>
               <View style={[styles.eventTypeIndicator, {backgroundColor: getEventTypeColor(event.type)}]}/>
@@ -36,6 +39,9 @@ export function EventDetailsScreen({route, navigation}: NativeStackScreenProps<M
           {!!event.description &&
               <Text style={[textStyles.description, {marginTop: 12, textAlign: "justify"}]}>{event.description}</Text>}
         </View>
+        {!!location && <View style={styles.mapContainer}>
+          <MapDisplay location={location}/>
+        </View>}
       </ScrollView>
   );
 }
@@ -61,6 +67,12 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     alignSelf: 'center',
     marginLeft: 4,
+  },
+  mapContainer: {
+    marginVertical: 12,
+    borderRadius: 12,
+    overflow: 'hidden',
+    elevation: 12,
   },
 })
 

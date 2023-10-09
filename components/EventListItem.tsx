@@ -5,6 +5,7 @@ import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {MainStackParamList} from "../navigation/MainStackNavigator";
 import {colors} from "../constants/colors";
 import {getTimeFrame} from "../constants/time";
+import {Location, locations} from "../constants/locations";
 
 export function EventListItem<T extends eventType>({event, disableHighlight = false}: {
   event: Event<T>
@@ -12,7 +13,9 @@ export function EventListItem<T extends eventType>({event, disableHighlight = fa
 }) {
   const navigation = useNavigation<NavigationProp<MainStackParamList>>();
   const currentDate = new Date("2023-10-10T12:00:00.000Z");
-  const doesTakePlaceNow: boolean = disableHighlight ? false : event.datetime_start < currentDate && currentDate < event.datetime_end
+  const doesTakePlaceNow: boolean = disableHighlight ? false : event.datetime_start < currentDate && currentDate < event.datetime_end;
+  const location: Location | undefined = locations.find((location) => location.id === event?.locationId);
+
   const textStyles = StyleSheet.create({
     title: {
       fontSize: 18,
@@ -45,7 +48,7 @@ export function EventListItem<T extends eventType>({event, disableHighlight = fa
         <Text style={textStyles.title} numberOfLines={3} ellipsizeMode='tail'>{event.name}</Text>
         <Text style={textStyles.label}>{getTimeFrame(event.datetime_start, event.datetime_end)}</Text>
         {lecturerLabel}
-        {!!event.place && <Text style={textStyles.label}>Miejsce: {event.place}</Text>}
+        {!!location && <Text style={textStyles.label}>Miejsce: {location.name}{!!event.room && `, ${event.room}`}</Text>}
       </View>
       <View style={{justifyContent: "center"}}>
         <MaterialCommunityIcons name="chevron-right" size={32} color={doesTakePlaceNow ? "white" : "black"}/>

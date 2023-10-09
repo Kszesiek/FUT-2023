@@ -1,4 +1,13 @@
-import {Text, View, ScrollView, TouchableOpacity, StyleSheet, Image} from "react-native";
+import {
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
+  Linking
+} from "react-native";
 import * as React from "react";
 import {AntDesign} from "@expo/vector-icons";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
@@ -50,10 +59,10 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
       <Text style={textStyles.title}>Partnerzy wydarzenia</Text>
       <View>
         <View style={styles.sponsorsRow}>
-            <Image style={{...styles.sponsorLogo, aspectRatio: 1.765}}
-                   source={require('../assets/sponsors/redbull.png')}/>
-            <Image style={{...styles.sponsorLogo, aspectRatio: 1}}
-                   source={require('../assets/sponsors/nescafe.png')}/>
+          <Image style={{...styles.sponsorLogo, aspectRatio: 1.765}}
+                 source={require('../assets/sponsors/redbull.png')}/>
+          <Image style={{...styles.sponsorLogo, aspectRatio: 1}}
+                 source={require('../assets/sponsors/nescafe.png')}/>
         </View>
         <View style={styles.sponsorsRow}>
           <Image style={{...styles.sponsorLogo, aspectRatio: 3}}
@@ -64,8 +73,12 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
         <View style={styles.sponsorsRow}>
           <Image style={{...styles.sponsorLogo, aspectRatio: 2.2}}
                  source={require('../assets/sponsors/reflectgroup.png')}/>
-          <Image style={{...styles.sponsorLogo, aspectRatio: 4}}
-                 source={require('../assets/sponsors/KS-Distribution.png')}/>
+          <TouchableWithoutFeedback onPress={() => {
+            Linking.openURL('https://www.instagram.com/ksdistribution_official/#')
+          }}>
+            <Image style={{...styles.sponsorLogo, aspectRatio: 4}}
+                   source={require('../assets/sponsors/KS-Distribution.png')}/>
+          </TouchableWithoutFeedback>
         </View>
       </View>
     </ScrollView>
