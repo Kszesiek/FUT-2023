@@ -10,16 +10,20 @@ import {
 } from "react-native";
 import * as React from "react";
 import {EventListItem} from "../components/EventListItem";
-import {useEffect, useRef, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {MainStackParamList} from "../navigation/MainStackNavigator";
 import {events, possibleEventTypes, getEventTypeColor, eventTypeName} from "../constants/events";
 import HighlightChooser from "../components/HighlightChooser";
 import {colors} from "../constants/colors";
-import {currentDate, weekday} from "../constants/time";
+import {weekday} from "../constants/time";
 import {SimpleLineIcons} from "@expo/vector-icons";
+import {AppContext} from "../state/AppContext";
 
 export function ScheduleScreen({route, navigation}: NativeStackScreenProps<MainStackParamList, 'Schedule'>) {
+  const appContext = useContext(AppContext);
+  const currentDate = appContext.currentTime;
+
   const flatListRef = useRef<FlatList>(null);
   const [isHelpModalVisible, setIsHelpModalVisible] = useState(false);
   const [basicOrExtended, setBasicOrExtended] = useState<"basic" | "extended">("basic");

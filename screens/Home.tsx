@@ -16,17 +16,17 @@ import {MainStackParamList} from "../navigation/MainStackNavigator";
 import {EventListItem} from "../components/EventListItem";
 import {events} from "../constants/events";
 import {colors} from "../constants/colors";
-import {currentDate} from "../constants/time";
 import {useContext} from "react";
 import {AppContext} from "../state/AppContext";
 import {AppearingView} from "../components/AppearingView";
 
 export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStackParamList, 'Home'>) {
+  const appContext = useContext(AppContext);
+  const currentDate = appContext.currentTime;
+
   const minutes_before = 2 * 60 * 60 * 1000;
   const eventsStartingSoon = events.filter((event) => event.datetime_start.getTime() - currentDate.getTime() < minutes_before && currentDate < event.datetime_start);
   const eventsTakingPlaceNow = events.filter((event) => event.datetime_start < currentDate && currentDate < event.datetime_end);
-  //
-  const appContext = useContext(AppContext);
 
   async function installAsPWA() {
     if (appContext.PWAEvent == undefined)
@@ -44,7 +44,6 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
         {/*<Text style={{textAlign: "right"}}>Environment: {process.env.NODE_ENV}</Text>*/}
         {/*<Text style={{fontStyle: "italic"}}>Product is not indicative of the final version.</Text>*/}
         {/*<Text style={{fontStyle: "italic"}}>Czy coś tam.</Text>*/}
-        <Text style={{fontStyle: "italic"}}>{new Date(Date.now()).toLocaleString()}</Text>
         <AppearingView>
           <View style={styles.outerCard}>
             <Text style={{...textStyles.title, marginTop: 0, marginBottom: 8,}}>Zainstaluj mnie!</Text>
@@ -107,7 +106,7 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
             <TouchableWithoutFeedback onPress={() => {
               Linking.openURL('https://msapps.pl/')
             }}>
-              <Image style={{...styles.sponsorLogo, aspectRatio: 3.5}}
+              <Image style={{...styles.sponsorLogo, ...styles.bigSponsorLogo, aspectRatio: 3.5}}
                      source={require('../assets/sponsors/msapps.png')}/>
             </TouchableWithoutFeedback>
           </View>
@@ -115,11 +114,11 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
             <TouchableWithoutFeedback onPress={() => {
               Linking.openURL('https://ispot.pl/?gclid=Cj0KCQjwsp6pBhCfARIsAD3GZubaid3MbafCYgaUeH3aNKmqQutusALwB5JFNdH5q2-NcegOxsO14b4aAsLKEALw_wcB&gclsrc=aw.ds')
             }}>
-              <Image style={{...styles.sponsorLogo, aspectRatio: 6.5}}
+              <Image style={{...styles.sponsorLogo, ...styles.bigSponsorLogo, aspectRatio: 6.5}}
                      source={require('../assets/sponsors/iSpot_AES_logo_wht.png')}/>
             </TouchableWithoutFeedback>
           </View>
-          <View style={styles.sponsorsRow}>
+          <View style={[styles.sponsorsRow, {paddingTop: 8, paddingBottom: 16, flex: 2,}]}>
             <TouchableWithoutFeedback onPress={() => {
               Linking.openURL('https://www.cortland.pl/edukacja/istudies/')
             }}>
@@ -209,6 +208,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginHorizontal: 12,
     maxWidth: 300,
+  },
+  bigSponsorLogo: {
+    maxWidth: 600,
   },
   outerCard: {
     borderRadius: 12,

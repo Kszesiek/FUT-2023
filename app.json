@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/fut_icon.png",
+    "theme_color": "#830628",
     "icons": [
       {
         "src": "./assets/fut_icon.png",
@@ -33,7 +34,8 @@
       "package": "com.kszesiek.FUT2023"
     },
     "web": {
-      "favicon": "./assets/fut_icon.png"
+      "favicon": "./assets/fut_icon.png",
+      "theme_color": "#830628"
     },
     "extra": {
       "eas": {

@@ -4,13 +4,18 @@ import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {MainStackParamList} from "../navigation/MainStackNavigator";
 import {colors} from "../constants/colors";
-import {currentDate, getTimeFrame} from "../constants/time";
+import {getTimeFrame} from "../constants/time";
 import {Location, locations} from "../constants/locations";
+import {useContext} from "react";
+import {AppContext} from "../state/AppContext";
 
 export function EventListItem<T extends eventType>({event, disableHighlight = false}: {
   event: Event<T>
   disableHighlight?: boolean
 }) {
+  const appContext = useContext(AppContext);
+  const currentDate = appContext.currentTime;
+
   const navigation = useNavigation<NavigationProp<MainStackParamList>>();
   const doesTakePlaceNow: boolean = disableHighlight ? false : event.datetime_start < currentDate && currentDate < event.datetime_end;
   const location: Location | undefined = locations.find((location) => location.id === event?.locationId);
