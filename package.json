@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build:azure": "npx expo export:web && cp assets/fut_icon.png web-build/static/media/"
   },
   "dependencies": {
     "@expo-google-fonts/ubuntu": "^0.2.3",

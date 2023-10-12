@@ -5,6 +5,14 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/fut_icon.png",
+    "icons": [
+      {
+        "src": "./assets/fut_icon.png",
+        "type": "image/png",
+        "sizes": "768x768",
+        "purpose": "any maskable"
+      }
+    ],
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/fut_splash.png",
