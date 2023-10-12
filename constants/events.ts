@@ -97,6 +97,7 @@ export const events: Array<Event<eventType>> = [
     datetime_end: new Date(2023, 9, 13, 15, 0),
     locationId: "df1a65d2-a51a-46a1-8134-24e086e65379",                                        //TODO: DO DOPRECYZOWANIA
     description: "Czy stres mnie zabija? Czyli jak to jest z tym stresem i jak go okiełznać. W trakcie szkolenia uczestnicy zrozumieją, dlaczego stres jest obecny w naszym życiu i czy ma więcej wad czy zalet. Przyjrzymy się różnym metodom radzenia sobie ze stresem i przećwiczymy niektóre z nich. A na koniec stworzymy plan wdrażania planu, czyli zwiększymy szansę na efektywne zarządzanie stresem.",
+    basic_or_extended: "extended",
     dress_code: "casual",
   },
   {
