@@ -77,7 +77,7 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
               </View>
             ) :
             <View style={{paddingVertical: 16, alignItems: 'center'}}>
-              <Text style={{fontStyle: 'italic'}}>Nie zbliżają się żadne z wydarzenia</Text>
+              <Text style={{fontStyle: 'italic'}}>Nie zbliżają się żadne wydarzenia</Text>
             </View>
         }
 
@@ -90,7 +90,7 @@ export function HomeScreen({route, navigation}: NativeStackScreenProps<MainStack
               </View>)
             :
             <View style={{paddingVertical: 16, alignItems: 'center'}}>
-              <Text style={{fontStyle: 'italic'}}>W tym momencie nie odbywają się żadne z wydarzenia</Text>
+              <Text style={{fontStyle: 'italic'}}>W tym momencie nie odbywają się żadne wydarzenia</Text>
             </View>
         }
         <TouchableOpacity style={styles.scheduleButton} onPress={() => navigation.navigate('Schedule')}>
