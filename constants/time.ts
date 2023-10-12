@@ -1,6 +1,6 @@
 export const weekday = ["Niedziela","Poniedziałek","Wtorek","Środa","Czwartek","Piątek","Sobota"];
 
-export   const currentDate = new Date(2023, 9, 14, 11, 0);
+export   const currentDate = new Date(Date.now()); //  new Date(2023, 9, 14, 11, 0);
 
 export function getTimeFrame(start: Date, end: Date) {
   if (start.getTime() === end.getTime()) {

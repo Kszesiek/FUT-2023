@@ -13,7 +13,7 @@ import {EventListItem} from "../components/EventListItem";
 import {useEffect, useRef, useState} from "react";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {MainStackParamList} from "../navigation/MainStackNavigator";
-import {events, Event, possibleEventTypes, getEventTypeColor, eventTypeName} from "../constants/events";
+import {events, possibleEventTypes, getEventTypeColor, eventTypeName} from "../constants/events";
 import HighlightChooser from "../components/HighlightChooser";
 import {colors} from "../constants/colors";
 import {currentDate, weekday} from "../constants/time";

@@ -35,3 +35,4 @@ yarn-error.*
 *.tsbuildinfo
 /FUT ustalenia.txt
 assets_old/
+/jak naprawić PWA.txt

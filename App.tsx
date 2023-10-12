@@ -17,6 +17,7 @@ import {
 } from '@expo-google-fonts/ubuntu';
 
 import * as serviceWorkerRegistration from "./src/serviceWorkerRegistration";
+import {AppContextProvider} from "./state/AppContext";
 
 export default function App() {
   let [fontsLoaded, fontError] = useFonts({
@@ -36,9 +37,11 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <MainStackNavigator/>
-      </NavigationContainer>
+      <AppContextProvider>
+        <NavigationContainer>
+          <MainStackNavigator/>
+        </NavigationContainer>
+      </AppContextProvider>
     </SafeAreaProvider>
   );
 }

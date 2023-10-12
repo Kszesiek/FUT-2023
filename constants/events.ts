@@ -245,7 +245,7 @@ export const events: Array<Event<eventType>> = [
     id: "18ddbb31-23b5-4dc2-ba47-67000d60ed0f",
     name: "Gala Forum Uczelni Technicznych",
     type: "main event",
-    datetime_start: new Date(2023, 9, 14, 20, 0),
+    datetime_start: new Date(2023, 9, 14, 19, 30),
     datetime_end: new Date(2023, 9, 15, 4, 0),
     locationId: "2143a80f-0485-49eb-a4bf-a25b2f654dc8",
     room: "Duża Aula",
