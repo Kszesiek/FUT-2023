@@ -44,7 +44,7 @@ export const events: Array<Event<eventType>> = [
     type: "attraction",
     datetime_start: new Date(2023, 9, 12, 16, 45),
     datetime_end: new Date(2023, 9, 12, 19, 45),
-    locationId: "418987c4-9361-4af3-8e13-196435af7830",
+    locationId: "cb6367d7-51bb-4412-a561-07ea5579aaa4",
     description: "Specjalnie dla wersji rozszerzonej zaplanowaliśmy na czwartkowe popołudnie rozluźniającą sesję Puppy Jogi. Sesja trwa 60 minut – 45 min. to zajęcia z jogi, 15 min. to zabawa z psiakami.",
     basic_or_extended: "extended",
     dress_code: "strój sportowy",
