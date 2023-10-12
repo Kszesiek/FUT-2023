@@ -7,7 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "build:azure": "npx expo export:web && cp assets/fut_icon.png web-build/static/media/"
+    "build:azure": "npx expo export:web && cp assets/fut_icon.png web-build/static/media/ && cd web-build/ && bash ../fix_manifest.sh && bash ../fix_asset_manifest.sh"
   },
   "dependencies": {
     "@expo-google-fonts/ubuntu": "^0.2.3",
