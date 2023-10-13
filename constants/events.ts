@@ -92,10 +92,10 @@ export const events: Array<Event<eventType>> = [
     id: "253b4b7d-41f4-4ac3-b3fa-0d2b26c56a11",
     name: "Szkolenie dla delegatów – Czy stres mnie zabija?",
     type: "lecture",
-    lecturer: "Sławomir Prusakowski",
+    lecturer: "dr n. społ. Urszula Ziętalewicz",
     datetime_start: new Date(2023, 9, 13, 13, 0),
     datetime_end: new Date(2023, 9, 13, 15, 0),
-    locationId: "df1a65d2-a51a-46a1-8134-24e086e65379",                                        //TODO: DO DOPRECYZOWANIA
+    locationId: "df1a65d2-a51a-46a1-8134-24e086e65379",
     description: "Czy stres mnie zabija? Czyli jak to jest z tym stresem i jak go okiełznać. W trakcie szkolenia uczestnicy zrozumieją, dlaczego stres jest obecny w naszym życiu i czy ma więcej wad czy zalet. Przyjrzymy się różnym metodom radzenia sobie ze stresem i przećwiczymy niektóre z nich. A na koniec stworzymy plan wdrażania planu, czyli zwiększymy szansę na efektywne zarządzanie stresem.",
     basic_or_extended: "extended",
     dress_code: "casual",
