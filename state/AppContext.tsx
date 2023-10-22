@@ -16,13 +16,13 @@ export const AppContext = createContext<stateType>({
 
   PWAEvent: undefined,
   setPWAEvent: (e: any) => {},
-  currentTime: new Date(Date.now()),
+  currentTime: new Date(2023, 9, 13, 14, 0),
 })
 
 export function AppContextProvider({ children }: {children: React.JSX.Element | React.JSX.Element[]}) {
   const [isReadyToInstall, setIsReadyToInstall] = useState<boolean>(false);
   const [PWAEvent, setPWAEvent] = useState<any | undefined>(undefined);
-  const [currentTime, setCurrentTime] = useState<Date>(new Date(Date.now()));
+  const [currentTime, setCurrentTime] = useState<Date>(new Date(2023, 9, 13, 14, 0));
 
   function setReadyToInstall() {
     setIsReadyToInstall(true);
@@ -32,13 +32,15 @@ export function AppContextProvider({ children }: {children: React.JSX.Element | 
     setIsReadyToInstall(false);
   }
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date(Date.now()));
-    }, 60 * 1000);
+  // disabling this because the time is mocked anyway
 
-    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCurrentTime(new Date(Date.now()));
+  //   }, 60 * 1000);
+  //
+  //   return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  // }, []);
 
   const value = {
     isReadyToInstall: isReadyToInstall,
